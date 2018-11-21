@@ -6,13 +6,11 @@ import java.io.IOException;
 import java.util.*;
 
 public class ArgumentsParser {
-    ParsedArguments getArguments() throws Exception
+    ParsedArguments parseArguments() throws Exception
     {
         Scanner scanner = new Scanner(System.in);
-
         int nmbOfDevices = scanner.nextInt();
         int nmbOfTests = scanner.nextInt();
-
         List<List<Integer>> deviceTesterTests = new ArrayList<>(nmbOfTests);
 
         for(int currentLine = 0 ; currentLine < nmbOfTests ; ++currentLine) {
@@ -26,7 +24,7 @@ public class ArgumentsParser {
             deviceTesterTests.add(test);
         }
 
-        return new ParsedArguments();
+        return new ParsedArguments(nmbOfDevices, nmbOfTests, deviceTesterTests);
     }
 
     private void checkDuplicateDevices(List<Integer> test) throws DuplicateDeviceException {
@@ -41,21 +39,39 @@ public class ArgumentsParser {
     }
 
     private List<Integer> addDevicesToTest(int nmbOfDevices, Scanner scanner) {
-        List<Integer> test = new ArrayList<>(nmbOfDevices);
+        List<Integer> currentTest = new ArrayList<>(nmbOfDevices);
 
         for(int i = 0 ; i < nmbOfDevices ; ++i) {
             int deviceNumber = scanner.nextInt();
-            test.add(deviceNumber);
+            currentTest.add(deviceNumber);
         }
 
-        return test;
+        return currentTest;
     }
 
 
 
     public class ParsedArguments {
-        int nmbOfDevices;
-        int nmbOfTests;
-        List<List<Integer>> deviceTesterTests;
+        private int nmbOfDevices;
+        private int nmbOfTests;
+        private List<List<Integer>> deviceTesterTests;
+
+        public ParsedArguments(int nmbOfDevices, int nmbOfTests, List<List<Integer>> deviceTesterTests) {
+            this.nmbOfDevices = nmbOfDevices;
+            this.nmbOfTests = nmbOfTests;
+            this.deviceTesterTests = deviceTesterTests;
+        }
+
+        public int getNmbOfDevices() {
+            return nmbOfDevices;
+        }
+
+        public int getNmbOfTests() {
+            return nmbOfTests;
+        }
+
+        public List<List<Integer>> getDeviceTesterTests() {
+            return deviceTesterTests;
+        }
     }
 }

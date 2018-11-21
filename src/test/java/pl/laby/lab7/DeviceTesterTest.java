@@ -33,6 +33,6 @@ public class DeviceTesterTest {
 
         DeviceTester deviceTester = new DeviceTester();
         boolean testResult = deviceTester.conductTests(nmbOfDevices, nmbOfTests, deviceTesterTests);
-        assertTrue(testResult);
+        assertFalse(testResult);
     }
 }

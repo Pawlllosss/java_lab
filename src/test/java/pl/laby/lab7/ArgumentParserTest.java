@@ -19,7 +19,7 @@ public class ArgumentParserTest {
         String inputData = firstLine + testLine;
         System.setIn(new ByteArrayInputStream(inputData.getBytes()));
 
-        assertThrows(DuplicateDeviceException.class, () -> argumentsParser.getArguments());
+        assertThrows(DuplicateDeviceException.class, () -> argumentsParser.parseArguments());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ArgumentParserTest {
         String inputData = firstLine + testLine;
         System.setIn(new ByteArrayInputStream(inputData.getBytes()));
 
-        assertThrows(IOException.class, () -> argumentsParser.getArguments());
+        assertThrows(IOException.class, () -> argumentsParser.parseArguments());
 
         firstLine = "4 2\n";
         testLine = "1 2 4 3";
@@ -39,7 +39,7 @@ public class ArgumentParserTest {
         inputData = firstLine + testLine;
         System.setIn(new ByteArrayInputStream(inputData.getBytes()));
 
-        assertThrows(IOException.class, () -> argumentsParser.getArguments());
+        assertThrows(IOException.class, () -> argumentsParser.parseArguments());
 
         firstLine = "4 2\n";
         testLine = "1 2 4 3\n";
@@ -47,6 +47,8 @@ public class ArgumentParserTest {
         inputData = firstLine + testLine;
         System.setIn(new ByteArrayInputStream(inputData.getBytes()));
 
-        assertThrows(IOException.class, () -> argumentsParser.getArguments());
+        assertThrows(IOException.class, () -> argumentsParser.parseArguments());
     }
+
+    //TODO: check if devices are numerated from 1 to nmbOfDevices
 }
